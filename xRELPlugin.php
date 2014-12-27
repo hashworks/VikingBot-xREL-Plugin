@@ -79,7 +79,7 @@ class xRELPlugin extends basePlugin {
 			$string[] = "[" . $data['size']['number'] . $data['size']['unit'] . "]";
 		}
 		if ($url && isset($data['link_href'])) {
-			$string[] = "[" . $this->getShortUrl($data['link_href']) . "]";
+			$string[] = "- " . $this->getShortUrl($data['link_href']);
 		}
 		return join(' ', $string);
 	}
