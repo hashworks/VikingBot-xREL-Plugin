@@ -2,10 +2,34 @@
 
 class xRELPlugin extends basePlugin {
 
+	private $disabled;
+
+	/**
+	 * Called when plugins are loaded
+	 *
+	 * @param mixed[]	$config
+	 * @param resource 	$socket
+	**/
+	public function __construct($config, $socket) {
+		parent::__construct($config, $socket);
+		$this->disabled = false;
+		if (!ini_get('allow_url_fopen')) {
+			try {
+				ini_set('allow_url_fopen', '1');
+			} catch (Exception $e) {
+				logMsg("Unable to enable allow_url_fopen, disabling youtubePlugin.");
+				$this->disabled = true;
+			}
+		}
+	}
+
 	/**
 	 * @return array[]
 	 */
 	public function help() {
+		if ($this->disabled === true) {
+			return array();
+		}
 		return array(
 			array(
 				'command'     => 'upcoming',
@@ -35,6 +59,9 @@ class xRELPlugin extends basePlugin {
 	 * @param string $msg
 	 */
 	public function onMessage($from, $channel, $msg) {
+		if ($this->disabled === true) {
+			return;
+		}
 		$strings  = array();
 		$upcoming = $this->getCommandQuery($msg, "upcoming");
 		$latest   = $this->getCommandQuery($msg, "latest");
