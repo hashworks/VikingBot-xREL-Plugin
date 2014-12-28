@@ -1,7 +1,6 @@
 # VikingBot-xREL-Plugin
 
-A VikingBot Plugin to access the xREL.to API.<br/>
-Requires an enabled PHP curl extension.
+A VikingBot Plugin to access the xREL.to API.
 
 ### COMMANDS
 `!upcoming` Responds with a list of upcoming movies.<br/>
