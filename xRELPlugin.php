@@ -247,20 +247,11 @@ class xRELPlugin extends basePlugin {
 	}
 
 	private function getShortUrl($longUrl) {
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, 'https://www.googleapis.com/urlshortener/v1/url');
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, '{ "longUrl": ' . '"' . $longUrl . '" }');
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$result = curl_exec($ch);
-		curl_close($ch);
-		if ($result = json_decode($result, true)) {
-			if (isset($result['id'])) {
-				return $result['id'];
-			}
+		$shortUrl = trim(@file_get_contents("http://is.gd/create.php?format=simple&url=" . $longUrl));
+		if (!empty($shortUrl) && strpos($shortUrl, "http") !== false) {
+			return $shortUrl;
 		}
-		return false;
+		return $longUrl;
 	}
 
 	/**
