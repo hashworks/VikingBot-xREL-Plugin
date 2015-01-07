@@ -75,16 +75,16 @@ class xRELPlugin extends basePlugin {
 			$strings = $this->getHot($hot);
 		} elseif ($nfo !== false) {
 			$strings = array($this->getNfo($nfo));
-		} else {
-				// Check for dirnames in last post.
-			preg_match_all("/[a-z0-9._]{4,}-[a-z0-9]{3,}/i", $msg, $matches);
-			$matches = array_slice($matches[0], 0, 5);
-			foreach ($matches as $dirname) {
-				$nfo = $this->getNfo($dirname, false);
-				if ($nfo !== false) {
-					$strings[] = $nfo;
-				}
-			}
+		// } else {
+		// 		// Check for dirnames in last post.
+		// 	preg_match_all("/[a-z0-9._]{4,}-[a-z0-9]{3,}/i", $msg, $matches);
+		// 	$matches = array_slice($matches[0], 0, 5);
+		// 	foreach ($matches as $dirname) {
+		// 		$nfo = $this->getNfo($dirname, false);
+		// 		if ($nfo !== false) {
+		// 			$strings[] = $nfo;
+		// 		}
+		// 	}
 		}
 		if (count($strings) == 1) {
 			$this->sendMessage($channel, $strings[0], $from);
