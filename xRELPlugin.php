@@ -17,7 +17,7 @@ class xRELPlugin extends basePlugin {
 			try {
 				ini_set('allow_url_fopen', '1');
 			} catch (Exception $e) {
-				logMsg("Unable to enable allow_url_fopen, disabling youtubePlugin.");
+				logMsg("Unable to enable allow_url_fopen, disabling xREL-Plugin.");
 				$this->disabled = true;
 			}
 		}
